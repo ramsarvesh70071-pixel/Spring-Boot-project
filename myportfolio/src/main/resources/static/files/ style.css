@@ -1,0 +1,26 @@
+body {
+    font-family: Arial;
+    background: #f7f7f7;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+nav a {
+    margin-right: 10px;
+}
+
+     <style>
+                .profile-photo {
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    border: 3px solid #555;
+                    position: absolute;
+                    top: 20px;       /* Upar se distance */
+                    right: 20px;     /* Right side se distance */
+                    object-fit: cover;
+                }
+            </style>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/static/files/style.css" rel="stylesheet"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container mt-5">
+    <h2>Admin - Manage Projects</h2>
+
+    <!-- add / edit form -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form th:action="@{/admin/add}" method="post" enctype="multipart/form-data" th:object="${project}">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="mb-2">
+                    <input type="text" th:field="*{title}" placeholder="Title" class="form-control" required/>
+                </div>
+                <div class="mb-2">
+                    <textarea th:field="*{description}" placeholder="Description" rows="3" class="form-control"></textarea>
+                </div>
+                <div class="mb-2 row">
+                    <div class="col">
+                        <input type="text" th:field="*{githubLink}" placeholder="GitHub Link" class="form-control"/>
+                    </div>
+                    <div class="col">
+                        <input type="text" th:field="*{liveLink}" placeholder="Live Link" class="form-control"/>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <input type="file" name="imageFile" class="form-control"/>
+                </div>
+                <button class="btn btn-success">Save Project</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- projects table -->
+    <table class="table table-striped">
+        <thead>
+        <tr><th>Title</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${projects}">
+            <td th:text="${p.title}"></td>
+            <td>
+                <a th:href="@{/admin/edit/{id}(id=${p.id})}" class="btn btn-sm btn-primary">Edit</a>
+                <a th:href="@{/admin/delete/{id}(id=${p.id})}" class="btn btn-sm btn-danger"
+                   onclick="return confirm('Delete?')">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
